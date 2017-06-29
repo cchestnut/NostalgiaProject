@@ -41,13 +41,16 @@ public class memoryExplorerScript : MonoBehaviour {
     void spawnPic(Vector3 fwd) {
 
         //Instantiate((Texture2D)textures[0], new Vector3(fwd.x, fwd.y, fwd.z), rb.transform.rotation);
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Plane);
         Material cubeMat = new Material(Shader.Find("Standard"));
         cubeMat.mainTexture = (Texture2D)textures[(int)(Random.Range(0, textures.Length))];
         cube.GetComponent<Renderer>().material = cubeMat;
         cube.transform.position = new Vector3(fwd.x, fwd.y, fwd.z);
-        cube.transform.Rotate(Vector3.up, 180);
-        cube.transform.localScale = new Vector3(2f, 2f, 2f);
+        //cube.transform.Rotate(Vector3.left, 180);
+		cube.transform.rotation = this.transform.rotation;
+		cube.transform.Rotate (Vector3.left, 90);
+		cube.transform.Rotate (Vector3.up, 180);
+        cube.transform.localScale = new Vector3(.5f, .5f, .5f);
         currentSpeed += .2;
     }
 
